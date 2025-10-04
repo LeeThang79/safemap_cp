@@ -13,9 +13,7 @@ from config import Config
 # Import từ package community_processing
 from services.community_processing.types import CommunityReport, ValidationResult
 from services.community_processing.core_processor import CommunityReportProcessor
-from services.community_processing.reputation import UserReputationManager
 from services.community_processing.credibility import ReportCredibilityCalculator
-from services.community_processing.rewards import RewardSystem
 
 logger = logging.getLogger(__name__)
 redis_conn = RedisClient().get_client()
@@ -27,9 +25,7 @@ MOCK_EXISTING_EVENTS: List[Dict[str, Any]] = []
 class CommunityReportService:
     def __init__(self):
         self.report_processor = CommunityReportProcessor()
-        self.reputation_manager = UserReputationManager()
-        self.credibility_calculator = ReportCredibilityCalculator(self.reputation_manager)
-        self.reward_system = RewardSystem()
+    self.credibility_calculator = ReportCredibilityCalculator()
 
     async def process_new_report(self, report_data: Dict[str, Any]) -> Dict[str, Any]:
         """

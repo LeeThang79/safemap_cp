@@ -1,7 +1,6 @@
 import logging
 import math
 from typing import Dict
-from services.community_processing.reputation import UserReputationManager
 from config import Config
 
 logger = logging.getLogger(__name__)
@@ -9,16 +8,14 @@ logger = logging.getLogger(__name__)
 class ReportCredibilityCalculator:
     """Tính toán độ tin cậy của báo cáo"""
     
-    def __init__(self, reputation_manager: UserReputationManager):
-        self.reputation_manager = reputation_manager
-        
+    def __init__(self):
         self.w1 = Config.REPUTATION_WEIGHT_W1 # Trọng số uy tín người đăng
         self.w2 = Config.AGREE_VOTE_WEIGHT_W2 # Trọng số lượt đồng ý
         self.w3 = Config.DISAGREE_VOTE_WEIGHT_W3 # Trọng số lượt không đồng ý (âm)
-        
+
         self.min_votes_threshold = Config.MIN_VOTES_THRESHOLD # Ngưỡng số vote tối thiểu
         self.sigmoid_k = Config.SIGMOID_K # Tham số điều chỉnh độ dốc sigmoid
-        
+
         self.credibility_threshold_high = Config.CREDIBILITY_THRESHOLD_HIGH
         self.credibility_threshold_medium = Config.CREDIBILITY_THRESHOLD_MEDIUM
         self.credibility_threshold_low_remove = Config.CREDIBILITY_THRESHOLD_LOW_REMOVE

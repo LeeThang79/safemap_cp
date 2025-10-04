@@ -1,16 +1,16 @@
 from datetime import datetime
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, Optional
 from dataclasses import dataclass
 
 @dataclass
 class CommunityReport:
-  """Cấu trúc dữ liệu báo cáo từ cộng đồng"""
+    """Cấu trúc dữ liệu báo cáo từ cộng đồng"""
     user_id: str
     content: str
-    location: Optional[str] = None # Text description of location
+    location: Optional[str] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
-    timestamp: Optional[datetime] = None # Time of event, not submission
+    timestamp: Optional[datetime] = None
 
 @dataclass
 class ValidationResult:
@@ -18,4 +18,4 @@ class ValidationResult:
     is_valid: bool
     reason: str
     filtered_content: Optional[str] = None
-    extracted_info: Optional[Dict] = None # Extracted date, time, location from content
+    extracted_info: Optional[Dict] = None
